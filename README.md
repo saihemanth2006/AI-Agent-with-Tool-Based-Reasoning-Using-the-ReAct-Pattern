@@ -2,7 +2,7 @@
 
 An AI agent that solves multi-step problems by combining **Reasoning** and **Acting** (ReAct) with external tools. The agent iteratively thinks through a problem, calls the right tools to gather information or perform computations, observes the results, and continues until it arrives at a comprehensive answer.
 
-## ✨ Features
+##  Features
 
 - **ReAct Loop** — Iterative Reasoning + Acting pattern with full reasoning trace
 - **5 Built-in Tools** — Weather lookup, web search, safe math evaluation, Python execution, and file reading
