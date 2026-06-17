@@ -1,0 +1,15 @@
+services:
+  react-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react-agent
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ALLOWED_READ_DIR=/app/data
