@@ -1,4 +1,4 @@
-# 🤖 AI Agent with Tool-Based Reasoning — ReAct Pattern
+# AI Agent with Tool-Based Reasoning — ReAct Pattern
 
 An AI agent that solves multi-step problems by combining **Reasoning** and **Acting** (ReAct) with external tools. The agent iteratively thinks through a problem, calls the right tools to gather information or perform computations, observes the results, and continues until it arrives at a comprehensive answer.
 
@@ -13,7 +13,7 @@ An AI agent that solves multi-step problems by combining **Reasoning** and **Act
 - **Full Logging** — Colored console output showing every thought, action, and observation
 - **Dockerized** — Ready-to-run with Docker and Docker Compose
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
@@ -33,7 +33,7 @@ An AI agent that solves multi-step problems by combining **Reasoning** and **Act
 └── README.md
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -85,7 +85,7 @@ python main.py --interactive
 python main.py --provider openai --task "Calculate 2**10 + sqrt(144)"
 ```
 
-## 🐳 Docker Setup
+## Docker Setup
 
 ### Build and Run with Docker Compose
 
@@ -109,7 +109,7 @@ docker build -t react-agent .
 docker run -it --env-file .env react-agent --interactive
 ```
 
-## 🔧 Available Tools
+## Available Tools
 
 | Tool | Description | Implementation |
 |------|-------------|----------------|
@@ -119,7 +119,7 @@ docker run -it --env-file .env react-agent --interactive
 | `run_python(code)` | Execute Python code in a sandboxed subprocess | `subprocess` with 30s timeout |
 | `read_file(path)` | Read local text files with access control | Path validation + 100KB size limit |
 
-## 📋 Sample Prompts
+## Sample Prompts
 
 ### Single-Tool Tasks
 
@@ -142,7 +142,7 @@ python main.py --task "Find the weather in Paris and London, then calculate the 
 python main.py --task "Search for the population of Japan and write Python code to calculate how many years it would take to double at 0.5% growth rate"
 ```
 
-## 🧪 Running Tests
+## Running Tests
 
 ```bash
 # Run all tests
@@ -166,7 +166,7 @@ All configuration is done through environment variables (or the `.env` file):
 | `MAX_STEPS` | `10` | Max reasoning steps per task |
 | `ALLOWED_READ_DIR` | `./` | Directory the `read_file` tool can access |
 
-## 🔄 How the ReAct Loop Works
+## How the ReAct Loop Works
 
 ```
 User Task
@@ -175,25 +175,25 @@ User Task
 ┌─────────────────────────────────┐
 │  Step 1: Call LLM               │
 │  ┌───────────────────────────┐  │
-│  │ 💭 Thought: "I need to    │  │
+│  │ Thought: "I need to    │  │
 │  │    get the weather first" │  │
-│  │ 🔧 Action: get_weather()  │  │
+│  │ Action: get_weather()  │  │
 │  └───────────────────────────┘  │
-│  📊 Observation: "Sunny, 25°C"  │
+│  Observation: "Sunny, 25°C"  │
 │                                 │
 │  Step 2: Call LLM               │
 │  ┌───────────────────────────┐  │
-│  │ 💭 Thought: "Now I need   │  │
+│  │  Thought: "Now I need   │  │
 │  │    to calculate..."       │  │
-│  │ 🔧 Action: calculate()    │  │
+│  │  Action: calculate()    │  │
 │  └───────────────────────────┘  │
-│  📊 Observation: "120"          │
+│   Observation: "120"          │
 │                                 │
 │  Step 3: Call LLM               │
 │  ┌───────────────────────────┐  │
-│  │ 💭 Thought: "I have all   │  │
-│  │    the info I need"       │  │
-│  │ ✅ Final Answer            │  │
+│  │  Thought: "I have all   │  │
+│  │   the info I need"       │  │
+│  │ Final Answer            │  │
 │  └───────────────────────────┘  │
 └─────────────────────────────────┘
     │
@@ -201,23 +201,23 @@ User Task
 Final Answer returned to user
 ```
 
-## 📝 Example Output
+##  Example Output
 
 ```
 ══════════════════════════════════════════════════════════════════════
-  🤖  ReAct Agent — GEMINI (default)
+   ReAct Agent — GEMINI (default)
   Max Steps: 10
 ══════════════════════════════════════════════════════════════════════
 
-📋 Task: What's the weather in New York City, and what is 5 factorial?
+Task: What's the weather in New York City, and what is 5 factorial?
 
 --- Step 1/10 ---
-💭 Thought:
+ Thought:
    I need to get the weather in New York City and calculate 5 factorial.
    Let me start with the weather.
 
-🔧 Action: get_weather({"city": "New York City"})
-📊 Observation:
+ Action: get_weather({"city": "New York City"})
+ Observation:
    Weather in New York, United States of America:
      Condition: Partly cloudy
      Temperature: 24°C (75°F)
@@ -226,22 +226,22 @@ Final Answer returned to user
      Wind Speed: 15 km/h
 
 --- Step 2/10 ---
-💭 Thought:
+ Thought:
    I have the weather data. Now I need to calculate 5 factorial (5!).
 
-🔧 Action: calculate({"expression": "5 * 4 * 3 * 2 * 1"})
-📊 Observation:
+Action: calculate({"expression": "5 * 4 * 3 * 2 * 1"})
+Observation:
    5 * 4 * 3 * 2 * 1 = 120
 
 --- Step 3/10 ---
-✅ Final Answer:
+Final Answer:
    The weather in New York City is partly cloudy with a temperature
    of 24°C (75°F) and 65% humidity. 5 factorial (5!) equals 120.
 
 Completed in 3 step(s).
 ```
 
-## 🛡️ Safety Features
+##  Safety Features
 
 - **Max Steps Limit** — Prevents infinite loops and excessive API usage
 - **Sandboxed Code Execution** — `run_python` runs in a subprocess with a 30-second timeout
@@ -250,6 +250,6 @@ Completed in 3 step(s).
 - **File Size Limits** — Maximum 100KB file size for the `read_file` tool
 - **Error Handling** — All tools return descriptive error messages instead of crashing
 
-## 📄 License
+##  License
 
 This project is for educational purposes as part of a backend development assignment.
